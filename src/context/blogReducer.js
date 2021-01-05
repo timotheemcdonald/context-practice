@@ -5,6 +5,11 @@ export default (state, action) => {
                 ...state,
                 blogPosts: action.payload
             };
+        case 'SET_POST':
+            return{
+                ...state,
+                currentBlogPost: action.payload
+            }
         case 'SENDING_REQUEST':
             return {
                 ...state,

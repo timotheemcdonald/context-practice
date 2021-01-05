@@ -1,20 +1,25 @@
 import React from 'react';
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import BlogProvider from './context/BlogProvider';
-import PostList from './components/PostList'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import Navbar from './components/Navbar';
+import BlogProvider from './context/BlogProvider';
+import Home from './Pages/Home';
+import Post from './Pages/Post'
 
 import './App.css';
 
 function App() {
   return (
     <BlogProvider>
-    <div className="App">
-     <Navbar />
-     <Hero />
-     <PostList />
-    </div>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/:postId' exact component={Post}/>
+          </Switch>
+        </Router>
+      </div>
     </BlogProvider>
   );
 }

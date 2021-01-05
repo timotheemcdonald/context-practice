@@ -23,12 +23,25 @@ const BlogProvider = props => {
         }
     }
 
+    const getPostById = async id => {
+        try{
+            dispatch({ type: 'SENDING_REQUEST'});
+            const res = await fetch(`/posts/${id}`);
+            const data = await res.json();
+            dispatch({ type: 'REQUEST_FINISHED'});
+            dispatch({ type: 'SET_POST', payload: data })
+        }catch (err){
+            console.log(err)
+        }
+    }
+
     return (
         <blogContext.Provider value={{
             blogPosts: state.blogPosts,
             currentBlogPost: state.currentBlogPost,
             loading: state.loading,
-            getPosts: getPosts
+            getPosts: getPosts,
+            getPostById: getPostById
         }} >
             {props.children}
         </blogContext.Provider>
